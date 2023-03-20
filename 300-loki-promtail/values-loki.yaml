@@ -1,0 +1,33 @@
+singleBinary:
+  replicas: 1
+  persistence:
+    size: 2Gi
+  resources:
+    requests:
+      memory: 512Mi
+    limits:
+      memory: 512Mi
+loki:
+  auth_enabled: false
+  commonConfig:
+    replication_factor: 1
+  storage:
+    type: "filesystem"
+  compactor:
+    retention_enabled: true
+    shared_store: filesystem
+  limits_config:
+    retention_period: 168h
+
+test:
+  enabled: false
+
+monitoring:
+  selfMonitoring:
+    enabled: false
+    grafanaAgent:
+      installOperator: false
+  lokiCanary:
+    enabled: false
+  serviceMonitor:
+    enabled: true
