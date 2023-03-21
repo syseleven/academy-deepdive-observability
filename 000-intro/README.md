@@ -1,5 +1,7 @@
 # Introduction
 
+## Module Title: Observability, Monitoring & Alerting - Deep Dive
+
 ## Module info
 
 * **Duration:** ~5 hours 
@@ -8,7 +10,17 @@
 * **Optimized for** Linux and MacOS
 * Windows Users use WSL and/or PowerShell
 
-## Prerequisites
+## Prerequisites for trainers
+
+* rotate AWS route53 token for external-dns and cert-manager
+* AWS Route53: remove old DNS entries (*.workshop.metakube.org)
+* Cluster setup via Terraform
+* deploy ingress-nginx
+* deploy external-dns
+* deploy cert-manager
+* test keycloak before
+
+## Prerequisites for participants
 
 You need to have these tools installed on your local machine:
 
@@ -16,14 +28,7 @@ You need to have these tools installed on your local machine:
 - helm (>3.10)
 - linkerd (>2.12.4)
 
-Further this workshop is based on SysEleven's "Production Grade Deployment" workshop and we
-assume you have these services up and running:
-
-- Ingress Controller: ingress-nginx
-- cert-manager
-- external-dns
-
-## Preparation
+## Preparation for participants
 
 * Before you begin with the actual exercise please make sure to follow these steps to work in your own environment:
 
@@ -37,11 +42,11 @@ assume you have these services up and running:
 
 * Clone this repository to your working station and change into the directory for the following exercises
 
-## Start with
+## Participants start with
 
 Exercise [101-kube-prometheus-stack](../101-kube-prometheus-stack/README.md)
 
-## Landscape
+## Workshop environment
 
 You will share a single Kubernetes cluster with other workshop participants.
 Your own examples can be executed and tested in you personal namespace.

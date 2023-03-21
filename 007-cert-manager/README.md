@@ -24,7 +24,7 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 
 ## Configuration for route53
 
-* Add AWS cert-manager Secret Key to `credentials-secret.yaml`
+* Add AWS cert-manager Secret Key to `credentials-secret.yaml` (base64 encoded!)
 * Add AWS cert-manager Access Key to `clusterissuer.yaml`
 
 * Create ClusterIssuer
@@ -41,4 +41,4 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
   ```
 
 * last step: activate the ingress-nginx default-ssl-certificate
-in the previous hands-on folder in the file `values.yaml`
+in the previous hands-on folder in the file `values.yaml` and update ingress-nginx release
