@@ -32,10 +32,14 @@ linkerd install | kubectl apply -f -
 linkerd check
 ```
 
+* Configure Prometheus to scrape linkerd metrics
+
+`helm upgrade --install --namespace monitoring -f ext-prom-scrape-linkerd.yaml --version 45.6.0 prom prometheus-community/kube-prometheus-stack`
+
 * Add linkerd-viz Dashboard extension
 
 ```shell
-linkerd viz install | kubectl apply -f -
+linkerd viz install -f linkerd-use-prometheus.yaml | kubectl apply -f -
 linkerd check
 ```
 

@@ -1,0 +1,3 @@
+prometheusUrl: existing-prometheus.xyz:9090 # TODO
+prometheus:
+  enabled: false
