@@ -1,5 +1,7 @@
 # Linkerd and Prometheus
 
+**This is required only once in the cluster.**
+
 ## Have Prometheus scrape Linkerd metrics
 
 * Configure Linkerd to export metrics to prometheus
