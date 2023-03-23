@@ -32,6 +32,15 @@
   kubectl label namespace monitoring deepdive-observability=true
   ```
 
+* Important!
+  Since we only have RWO storage for persistent volumes and Grafana is not deployed as a StetefulSet
+  we have to make sure the grafana pod is scheduled on the same node its PVC is attached to.
+  So, let's reserve the first node for Grafana by setting a label.
+
+    ```shell
+    kubectl label node $(kubectl get no -o jsonpath='{.items[0].metadata.name}') grafana=true
+    ```
+
 * Before installation of kube-prometheus-stack let's check what would be installed
 
   ```sh

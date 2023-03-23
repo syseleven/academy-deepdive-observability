@@ -1,0 +1,12 @@
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  name: web-application
+  labels:
+    app: web-application
+spec:
+  podSelector:
+    matchLabels:
+      app: web-application
+  port: 8080
+  proxyProtocol: HTTP/1

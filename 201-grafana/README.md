@@ -5,7 +5,7 @@
 **This installation is required only once per cluster.**
 
 We already deployed Grafana before and we can already use it internally
-but we would like to enable public (password-protected) access to it.
+but we would like to enable public access to it.
 
 * This we achieve by enabling its ingress resource in the `prom-values.yaml`.
 
@@ -39,5 +39,3 @@ Option 1:
 Option 2:
 
 * Visit public URL: https://grafana.workshop.metakube.org
-
-* import [Node Exporter Dashboard](https://grafana.com/grafana/dashboards/13978?pg=dashboards&plcmt=featured-sub1)

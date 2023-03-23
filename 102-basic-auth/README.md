@@ -37,7 +37,7 @@
 **Test 1 - internal:**
 
 * Visit http://localhost:9090/
-  * Result: Basic authentication is enforced with direct access
+  * Result: Basic authentication is not enforced with direct access
 
 **Test 2 - public:**
 
@@ -45,6 +45,7 @@
 
   `kubectl -n monitoring get ing`
 
+* Have your credentials at hand: `foo / bar`
 * Visit https://prometheus.workshop.metakube.org
 * Now verify the ingress resource is working:
   * Result: Prometheus web interface is now also available over its public DNS name.

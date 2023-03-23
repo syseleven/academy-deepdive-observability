@@ -1,0 +1,2 @@
+# make Linkerd send its metrics to our central Prometheus
+externalUrl: prom-kube-prometheus-stack-prometheus.monitoring.svc:9090

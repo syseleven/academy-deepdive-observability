@@ -50,6 +50,8 @@ This is done through a mechanism Prometheus offers. It is called serviceMonitors
   export YOURNAME
   kubectl -n ${YOURNAME} apply -f app-servicemonitor.yaml
   ```
+* Verify it is deployed: `kubectl -n ${YOURNAME} get servicemonitor`
+
 * View the result in prometheus web interface, after a while:
   * target
   * metrics with detailled labels

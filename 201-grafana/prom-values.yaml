@@ -34,8 +34,12 @@ prometheus:
 
 # deploy grafana
 grafana:
+  nodeSelector:
+    grafana: "true"
   replicas: 1
   adminPassword: admin
+  persistence:
+    enabled: true
   ingress:
     # enable grafana public ingress
     enabled: true
