@@ -25,7 +25,7 @@
 * Deploy our demo web-application into server namespace and label it
 
   ```shell
-  kubectl run web-application --image syseleven/metakube-hello:1.0.0 --port 80 -n ${YOURNAME}-server
+  kubectl run web-application --image syseleven/metakube-hello:1.0.0 --port 8080 -n ${YOURNAME}-server
   kubectl label pod web-application app=web-application -n ${YOURNAME}-server
   ```
 
@@ -33,9 +33,11 @@
 
   `kubectl expose pod web-application --port 8080 -n ${YOURNAME}-server`
 
-* Verify it is working in the browser
+* Verify it is working in the browser through a port-forward
 
   `kubectl port-forward web-application 8080:8080 -n ${YOURNAME}-server`
+
+  * Visit http://localhost:8080
 
 ### Client namespace
 
@@ -113,7 +115,7 @@ which will analyze incoming traffic.
 
 * Then apply the AuthorizationPolicy to control traffic
 
-`kubectl apply -f server/authorization-policy.yaml -n ${YOURNAME}-server`
+  `kubectl apply -f server/authorization-policy.yaml -n ${YOURNAME}-server`
 
 * Verify
 

@@ -1,5 +1,17 @@
 # kube-prometheus-stack
 
+## Preparation
+
+* Before you begin with the actual exercise please make sure to follow these steps to work in your own environment:
+
+  ```shell
+  read -p "Please enter your name (without blanks e.g. johndoe): " YOURNAME
+  export YOURNAME
+  kubectl create ns ${YOURNAME}
+  kubectl label namespace ${YOURNAME} deepdive-observability=true
+  kubectl config set-context --current --namespace=${YOURNAME}
+  ```
+
 ### Deploy your own application
 
 **This installation is required in every participants namespace.**
@@ -7,8 +19,6 @@
 * Deploy the application
 
   ```shell
-  read -p "Please enter your name (without blanks e.g. johndoe): " YOURNAME
-  export YOURNAME
   helm -n ${YOURNAME} upgrade --install ${YOURNAME}-metrics-app metrics-app --set ingress.host=${YOURNAME}.workshop.metakube.org --set tls.cn=${YOURNAME}.workshop.metakube.org
   ```
 
