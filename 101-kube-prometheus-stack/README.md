@@ -25,7 +25,7 @@
   ```
 
 * Important!
-  Since we only have RWO storage for persistent volumes and Grafana is not deployed as a StetefulSet
+  Since we only have RWO storage for persistent volumes and Grafana is not deployed as a StatefulSet
   we have to make sure the grafana pod is scheduled on the same node its PVC is attached to.
   So, let's reserve the first node for Grafana by setting a label.
 
@@ -45,7 +45,7 @@
   helm diff upgrade --namespace monitoring --disable-validation --allow-unreleased prom prometheus-community/kube-prometheus-stack --version 45.6.0 --values prom-values.yaml
   ```
 
-* Inspect the values it will deployed with: `prom-values.yaml`
+* Inspect the values it will be deployed with: `prom-values.yaml`
   * take notice of the `retention` information
   * take notice of the `persistence` settings
 
