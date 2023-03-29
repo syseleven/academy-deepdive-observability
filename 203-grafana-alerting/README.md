@@ -27,7 +27,7 @@
 * according to your threshold it might already be "firing"
 * to trigger a firing alert you can call the `/ping` endpoint of your metrics-app
   until the limit is reached
-  * `curl https://<YOURNAME>.workshop.metakube.org/ping`
+  * `curl https://${YOURNAME}.workshop.metakube.org/ping`
 
 ### Silence the alert
 

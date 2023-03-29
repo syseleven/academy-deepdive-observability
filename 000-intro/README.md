@@ -12,13 +12,13 @@
 
 ## Prerequisites for trainers
 
-* rotate AWS route53 token for external-dns and cert-manager
+* rotate AWS route53 token for external-dns and cert-manager (also in password safe)
 * AWS Route53: remove old DNS entries (*.workshop.metakube.org)
 * Cluster setup via Terraform
 * deploy ingress-nginx
 * deploy external-dns
 * deploy cert-manager
-* test keycloak before
+* rotate client secret in keycloak before (also in password safe)
 
 ## Prerequisites for participants
 

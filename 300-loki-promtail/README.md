@@ -16,8 +16,14 @@ helm upgrade --install promtail grafana/promtail --namespace monitoring -f value
 kubectl apply -f datasource.yaml
 ```
 
-## Restart Grafana
+## Datasources in Grafana
 
-```shell
-kubectl rollout restart deployment -n monitoring prom-grafana
-```
+* In Grafana web interface view the new Loki datasource under Settings / Datasources
+
+---
+
+* Optional: if the datasource does not appear after a while you can restart Grafana
+
+  ```shell
+  kubectl rollout restart deployment -n monitoring prom-grafana
+  ```

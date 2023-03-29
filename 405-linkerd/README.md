@@ -29,6 +29,7 @@ linkerd check --pre
 ```shell
 linkerd install --crds | kubectl apply -f -
 linkerd install | kubectl apply -f -
+# then wait a little while before issuing
 linkerd check
 ```
 
@@ -36,6 +37,7 @@ linkerd check
 
 ```shell
 linkerd viz install | kubectl apply -f -
+# then wait a little while before issuing
 linkerd check
 ```
 
@@ -58,12 +60,12 @@ Option 1:
 
 * Inject LinkerD proxy into existing deployments
 
-Add the "linkerd.io/inject: enabled" anntation to pods
-
   ```shell
     read -p "Please enter your name (without blanks e.g. johndoe): " YOURNAME
     export YOURNAME
   ```
+
+* Add the "linkerd.io/inject: enabled" annotation to pods
 
   ```shell
   kubectl -n ${YOURNAME} edit deployment web-application
@@ -78,9 +80,9 @@ Option 2:
 
 * you can also inject linkerd to all deployments in a specific namespace
 
-```shell
-kubectl -n ${YOURNAME} get deployments -o yaml | linkerd inject - | kubectl apply -f -
-```
+  ```shell
+  kubectl -n ${YOURNAME} get deployments -o yaml | linkerd inject - | kubectl apply -f -
+  ```
 
 * Result: your pods now consist of +1 additional container.
 
@@ -91,7 +93,15 @@ kubectl -n ${YOURNAME} get deployments -o yaml | linkerd inject - | kubectl appl
 Result:
 * Observe the LinkerD dashboard and the connections to web-application
 
+* Try to access the web application from browser:
+  * Visit: https://web-application-YOURNAME.workshop.metakube.org/
+  * as a result "unmeshed" traffic from ingress-nginx-controller pods appear in linkerd web interface
+
 ---
+
+## Mesh the ingress-controller
+
+**This step is only required once per cluster.**
 
 * Also mesh the ingress controller and check LinkerD dashboard
 
@@ -119,3 +129,10 @@ Result:
 * and in more detail
 
 `linkerd viz -n ${YOURNAME} tap pod`
+
+---
+
+## Conclusion
+
+By default Linkerd allows any traffic to pass the service mesh.
+So traffic from unmeshed sources to meshed targets is allowed, but of course, not encrypted.

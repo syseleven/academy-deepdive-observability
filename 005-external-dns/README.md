@@ -42,14 +42,24 @@
 * Check Deployment, Services and Pods from previous Deployment and watch out for External IP for Service `service/nginx`
 
   ```shell
-  kubectl get deployment,pods,services
+  kubectl get deployment,pods,services -n external-dns
   ```
 
 * Should look like this
 
   ```shell
   NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)        AGE
-  service/nginx          LoadBalancer   10.240.26.62    185.56.130.x   80:32428/TCP   2m19s
+  service/nginx          LoadBalancer   10.240.26.62    x.x.x.x   80:32428/TCP   2m19s
+  ```
+
+* Visit and resolve test website
+
+Visit: http://nginx.workshop.metakube.org
+
+  ```shell
+  nslookup nginx.workshop.metakube.org
+  
+  # Result x.x.x.x
   ```
 
 * delete the externaldns-test Pod

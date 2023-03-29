@@ -40,16 +40,18 @@ Alerting rules are defined as CRD resources of kind "PrometheusRule".
   ```
 
 * Also notice: Prometheus CRDs such as PrometheusRules and ServiceMonitors are applied to your application's namespace.
-The don't have to reside in Prometheus' own namespace ("monitoring).
-So these individual rules can be coupled and rolled out with your application. This makes sense.
+They don't have to reside in Prometheus' own namespace ("monitoring).
+Instead these individual rules can be coupled and rolled out with your application. This makes sense.
 
 ### Trigger an alert
 
 * to trigger AlertManager firing an alert call your application endpoint to exceed the threshold of the rule
   * Browse or curl the URL more than 5 times:
   * `curl https://${YOURNAME}.workshop.metakube.org/ping`
+  * Optionally use this command:
+  * `for i in {1..10} ; do curl https://${YOURNAME}.workshop.metakube.org/ping ; done`
   * Verify:
-  * `curl https://johndoe.workshop.metakube.org/metrics | grep ping_request_count`
+  * `curl https://${YOURNAME}.workshop.metakube.org/metrics | grep ping_request_count`
 
 * View the result in the prometheus web interface
   * Status - Rules: new rule appears

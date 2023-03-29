@@ -10,8 +10,8 @@ provider: aws
 # AWS Access keys to inject as environment variables
 aws:
   credentials:
-    accessKey: "XXXXXXXXXX" #<-- please adjust
-    secretKey: "XXXXXXXXXX" #<-- please adjust
+    accessKey: "CHANGEME" #<-- please adjust
+    secretKey: "CHANGEME" #<-- please adjust
     mountPath: "/.aws"
     region: "eu-central-1"
     zoneType: "public"

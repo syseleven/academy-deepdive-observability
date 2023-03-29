@@ -71,7 +71,7 @@ grafana:
       auth_url: https://keycloak.metakube.org/auth/realms/observability/protocol/openid-connect/auth
       token_url: https://keycloak.metakube.org/auth/realms/observability/protocol/openid-connect/token
       client_id: grafana
-      client_secret: XXXXXXXXXXXXXXXXXXXXXXX # <-- please adjust
+      client_secret: XXXXXXXXXXXXXXXXXXXXXXXXXXXX # <-- please adjust
       name: KeyCloak Observability Realm
       role_attribute_path: contains(roles[*], 'Grafana-admin') && 'Grafana-admin' || contains(roles[*], 'Grafana-editor') && 'Grafana-editor' || 'Grafana-viewer'
       scopes: openid profile email

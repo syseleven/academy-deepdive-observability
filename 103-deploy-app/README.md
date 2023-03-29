@@ -38,7 +38,7 @@
   Rules:
     Host             Path  Backends
     ----             ----  --------
-    johndoe.workshop.metakube.org  
+    <YOURNAME>.workshop.metakube.org  
                      /          metrics-app-service:8090 (172.25.1.106:8090)
                      /ping      metrics-app-service:8090 (172.25.1.106:8090)
                      /metrics   metrics-app-service:8090 (172.25.1.106:8090)

@@ -61,7 +61,7 @@
 * Verify it is installed
 
   ```shell
-  helm -n monitoring list
+  helm -n monitoring list -a
   helm -n monitoring get values prom
   ```
 

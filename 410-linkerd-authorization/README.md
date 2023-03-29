@@ -74,7 +74,7 @@ which will analyze incoming traffic.
 
 * Verify
 
-`kubectl -n ${YOURNAME}-server get get servers.policy.linkerd.io`
+`kubectl -n ${YOURNAME}-server get servers.policy.linkerd.io`
 
 * Result - all requests should now be forbidden. Query the server again from the client pod:
 
