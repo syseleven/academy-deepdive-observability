@@ -37,6 +37,10 @@ Expected output: `Client version: stable-2.12.4`
 
   ```shell
   linkerd viz install | kubectl apply -f -
+  # Just for information:
+  # Dashboard extension can be uninstalled with this command
+  # linkerd viz uninstall | kubectl delete -f -
+  
   # then wait a little while before issuing
   linkerd check
   ```
