@@ -20,28 +20,28 @@ Expected output: `Client version: stable-2.12.4`
 
 * Check if everything is correct for LinkerD
 
-```shell
-linkerd check --pre
-```
+  ```shell
+  linkerd check --pre
+  ```
 
 * Install Linkerd in Cluster and verify installation
 
-```shell
-linkerd install --crds | kubectl apply -f -
-linkerd install | kubectl apply -f -
-# then wait a little while before issuing
-linkerd check
-```
+  ```shell
+  linkerd install --crds | kubectl apply -f -
+  linkerd install | kubectl apply -f -
+  # then wait a little while before issuing
+  linkerd check
+  ```
 
 * Add linkerd-viz Dashboard extension
 
-```shell
-linkerd viz install | kubectl apply -f -
-# then wait a little while before issuing
-linkerd check
-```
+  ```shell
+  linkerd viz install | kubectl apply -f -
+  # then wait a little while before issuing
+  linkerd check
+  ```
 
-* Access `linkerd viz dashboard &` directly - this command automatically opens your desktop browser.
+* Access `linkerd viz dashboard` directly - this command automatically opens your desktop browser.
 
 ---
 
@@ -49,10 +49,10 @@ linkerd check
 
 * Add an Ingress for LinkerD dashboard
 
-```shell
-kubectl apply -f basic-auth.yaml
-kubectl apply -f linkerd-ingress.yaml
-```
+  ```shell
+  kubectl apply -f optional-basic-auth.yaml
+  kubectl apply -f optional-linkerd-ingress.yaml
+  ```
 
 ---
 
@@ -105,9 +105,9 @@ Result:
 
 * Also mesh the ingress controller and check LinkerD dashboard
 
-```shell
-kubectl -n ingress-nginx get deployments -o yaml | linkerd inject - | kubectl apply -f -
-```
+  ```shell
+  kubectl -n ingress-nginx get deployments -o yaml | linkerd inject - | kubectl apply -f -
+  ```
 
 * Enable "refresh" on web-application demo page
 

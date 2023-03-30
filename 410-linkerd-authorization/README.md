@@ -4,6 +4,12 @@
 
 **This exercise can be performed by every participant.**
 
+### Step 0 - Overview
+
+![Linkerd AuthorizationPolicy](/home/choerl/PycharmProjects/github/syseleven/academy-deepdive-observability/410-linkerd-authorization/img/linkerd-auth-policy-arch.png)
+
+### Step 1
+
 * Prepare two individual namespaces
 
   ```shell
@@ -19,6 +25,10 @@
   kubectl annotate namespace ${YOURNAME}-server linkerd.io/inject=enabled -n ${YOURNAME}-server
   kubectl annotate namespace ${YOURNAME}-client linkerd.io/inject=enabled -n ${YOURNAME}-client
   ```
+
+---
+
+### Step 2
 
 ### Server namespace
 
@@ -39,49 +49,65 @@
 
   * Visit http://localhost:8080
 
+---
+
 ### Client namespace
 
 Task: Create a client pod to send requests to the server.
 
 * Create a serviceAccount which we will use for authentication.
 
-  `kubectl create serviceaccount client -n ${YOURNAME}-client`
+  ```shell
+  kubectl create serviceaccount client -n ${YOURNAME}-client
+  ```
 
-* Create the client pod
+* Create the client pod and make it use the serviceaccount
 
-  `kubectl run client --image radial/busyboxplus:curl --overrides='{ "spec": {"serviceAccount": "client" } }' -n ${YOURNAME}-client --command -- sleep 3600`
+  ```shell
+  kubectl run client --image radial/busyboxplus:curl --overrides='{ "spec": {"serviceAccount": "client" } }' -n ${YOURNAME}-client --command -- sleep 3600
+  ```
 
 * Exec into client pod and send requests to server
 
   ```shell
-  kubectl exec -it client -c client -n ${YOURNAME}-client -- curl web-application.${YOURNAME}-server:8080 -v
+  kubectl exec -it client -c client -n ${YOURNAME}-client -- curl web-application.${YOURNAME}-server:8080/from-client -v
   ```
 
 * Verify in the Linkerd dashboard
 
-Result: Traffic from client to server should be allowed with `HTTP/1.1 200 OK`
+**Result:**
+
+Traffic from client to server should be allowed with `HTTP/1.1 200 OK`
 
 ---
 
-### In server namespace secure the web-application
+### Step 3
+
+### Secure the web-application in server namespace
 
 Now we will secure the server application by applying an Authorization Policy in front of it
 which will analyze incoming traffic.
 
 * First, create a server CRD to identify our "server" providing the web-application:
  
-  `kubectl apply -n ${YOURNAME}-server -f server/server-crd.yaml`
+  ```shell
+  kubectl apply -n ${YOURNAME}-server -f server/server-crd.yaml
+  ```
 
 * Verify
 
-`kubectl -n ${YOURNAME}-server get servers.policy.linkerd.io`
+  ```shell
+  kubectl -n ${YOURNAME}-server get servers.policy.linkerd.io
+  ```
 
-* Result - all requests should now be forbidden. Query the server again from the client pod:
+* **Expected result:** From now on all requests should be denied.
 
-* Exec into client pod and send requests to server
+* To verify, query the server again from the client pod:
+
+* Exec into the client pod and send requests to the server
 
   ```shell
-  kubectl exec -it client -c client -n ${YOURNAME}-client -- curl web-application.${YOURNAME}-server:8080 -v
+  kubectl exec -it client -c client -n ${YOURNAME}-client -- curl web-application.${YOURNAME}-server:8080/from-client -v
   ```
   
   ```shell
@@ -97,12 +123,20 @@ which will analyze incoming traffic.
   < 
   ```
 
-* Verify in the Linkerd dashboard under tap or directly from CLI while curl'ing
-  `linkerd viz tap pod/client --namespace ${YOURNAME}-client --to pod/web-application --to-namespace {YOURNAME}-server`
+* Verify in the Linkerd dashboard under tap
+* or directly from CLI while curl'ing (replace "YOURNAME" in the following command)
+
+  ```shell
+  linkerd viz tap pod/client --namespace <YOURNAME>-client --to pod/web-application --to-namespace <YOURNAME>-server
+  ```
+
+* **Result:** all requests are now forbidden.
 
 ---
 
-### In server namespace apply an AuthorizationPolicy
+### Step 4
+
+### Apply an AuthorizationPolicy in server namespace
 
 
 * First adjust your namespace in the file `server/authorization-policy.yaml`
@@ -115,45 +149,53 @@ which will analyze incoming traffic.
 
 * Then apply the AuthorizationPolicy to control traffic
 
-  `kubectl apply -f server/authorization-policy.yaml -n ${YOURNAME}-server`
+  ```shell
+  kubectl apply -f server/authorization-policy.yaml -n ${YOURNAME}-server
+  ```
 
 * Verify
 
-  `kubectl -n ${YOURNAME}-server get authorizationpolicies.policy.linkerd.io`
+  ```shell
+  kubectl -n ${YOURNAME}-server get authorizationpolicies.policy.linkerd.io
+  ```
 
 ---
 
-### Verify incoming traffic from client
+### Step 5
+
+### Inspect incoming traffic from client
 
 * Query the server again from the client pod:
 
 * Exec into client pod and send requests to server
 
   ```shell
-  kubectl exec -it client -c client -n ${YOURNAME}-client -- curl web-application.${YOURNAME}-server:8080 -v
+  kubectl exec -it client -c client -n ${YOURNAME}-client -- curl web-application.${YOURNAME}-server:8080/from-client -v
   ```
 
 * Result - all requests should be allowed again.
 
 ---
 
+### Step 6
+
 ### Now verify that our AuthorizationPolicy is enforced
 
-Task: Start another client pod which does not use the correct serviceAccount
+**Task:** Start another client pod which does not use the correct serviceAccount
 
 * Start a second client pod and curl the server web-application again
 
   ```shell
   kubectl run client2 --image radial/busyboxplus:curl -n ${YOURNAME}-client --command -- sleep 7200
   
-  kubectl exec -it client2 -c client2 -n ${YOURNAME}-client -- curl web-application.${YOURNAME}-server:8080 -v
+  kubectl exec -it client2 -c client2 -n ${YOURNAME}-client -- curl web-application.${YOURNAME}-server:8080/from-client2 -v
   ```
 
-* Result - Requests from client2 should be forbidden.
+* **Result:** Requests from client2 are be forbidden.
 
 ---
 
 ### Conclusion
 
-We successfully applied an AuthorizationPolicy to our server web-application which controlls incoming traffic by
-certain criteria.
+We successfully applied an AuthorizationPolicy to our server web-application which controls incoming traffic by
+certain criteria such as serviceaccounts.
