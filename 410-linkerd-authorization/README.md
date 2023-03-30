@@ -6,7 +6,7 @@
 
 ### Step 0 - Overview
 
-![Linkerd AuthorizationPolicy](/home/choerl/PycharmProjects/github/syseleven/academy-deepdive-observability/410-linkerd-authorization/img/linkerd-auth-policy-arch.png)
+![Linkerd AuthorizationPolicy](img/linkerd-auth-policy-arch.png)
 
 ### Step 1
 
