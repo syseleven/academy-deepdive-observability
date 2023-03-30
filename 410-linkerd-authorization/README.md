@@ -199,3 +199,5 @@ which will analyze incoming traffic.
 
 We successfully applied an AuthorizationPolicy to our server web-application which controls incoming traffic by
 certain criteria such as serviceaccounts.
+
+Using a service mesh in Kubernetes lifts networking, security but also complexity to a higher level!
