@@ -27,3 +27,27 @@ kubectl apply -f datasource.yaml
   ```shell
   kubectl rollout restart deployment -n monitoring prom-grafana
   ```
+
+## Inspect Loki features in Grafana
+
+### Loki Journal Log
+
+* View the scrape config of one of the promtail pods
+
+  ```shell
+  kubectl -n monitoring exec -it promtail-<REPLACE-BY-ID> -- cat /etc/promtail/promtail.yaml
+  ```
+
+### Loki Alerting Rules
+
+* In Grafana create an alerting rule from one of Loki's logs
+
+* For example use this query:
+
+  ```sql
+  sum by (pod) (count_over_time({namespace="kube-system"} |~ "WARNING" [5m]))
+  ```
+
+**Example alerting rule**
+
+![](img/loki-grafana-alert-rule.png)

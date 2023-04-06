@@ -73,7 +73,7 @@ grafana:
       client_id: grafana
       client_secret: XXXXXXXXXXXXXXXXXXXXXXXXXXXX # <-- please adjust
       name: KeyCloak Observability Realm
-      role_attribute_path: contains(roles[*], 'Grafana-admin') && 'Grafana-admin' || contains(roles[*], 'Grafana-editor') && 'Grafana-editor' || 'Grafana-viewer'
+      role_attribute_path: contains(roles[*], 'Grafana-admin') && 'Admin' || contains(roles[*], 'Grafana-editor') && 'Editor' || 'Viewer'
       scopes: openid profile email
       empty_scopes: false
       auto_login: false
