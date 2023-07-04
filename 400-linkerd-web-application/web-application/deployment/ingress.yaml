@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - web-application-choerl.workshop.metakube.org # <-- please adjust
+        - web-application-<YOURNAME>.workshop.metakube.org # <-- please adjust
       secretName: workshop-tls-cert
   rules:
-    - host: web-application-choerl.workshop.metakube.org # <-- please adjust
+    - host: web-application-<YOURNAME>.workshop.metakube.org # <-- please adjust
       http:
         paths:
           - path: /
